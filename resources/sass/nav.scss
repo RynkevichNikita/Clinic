@@ -1,0 +1,18 @@
+header {
+    width: 50%;
+    margin: 20px 0px;
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+
+        a {
+            text-decoration: none;
+            border: 1px solid green;
+            background-color: rgb(1, 167, 1);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    }
+}

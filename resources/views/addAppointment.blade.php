@@ -1,21 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite(['resources/sass/body.scss', 'resources/sass/nav.scss', 'resources/sass/form.scss'])
-    <title>New appointment</title>
-</head>
-<body>    
-    <header>
-        <x-nav/>
-    </header>
+<x-base>
+    <x-slot:vite>
+        @vite(['resources/sass/body.scss', 'resources/sass/nav.scss', 'resources/sass/form.scss'])
+    </x-slot>
+    <x-slot:title>
+        New appointment
+    </x-slot>
+
     <form action="addAppointment" method="POST">
         @csrf
         <div>
-            <label for="appointmentDate">Choose an appointment date:</label>
-            <input type="date" name="appointmentDate" id="appointmentDate">
+            <label for="appointment_date">Choose an appointment date:</label>
+            <input type="date" name="appointment_date" id="appointment_date">
         </div>
         <div>
             <label for="patient_id">Patient:</label>
@@ -45,5 +40,4 @@
             </ul>
         </div>
     @endif
-</body>
-</html>
+</x-base>

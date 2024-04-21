@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite(['resources/sass/body.scss', 'resources/sass/nav.scss', 'resources/sass/form.scss', 'resources/sass/edit.scss'])
-    <title>Edit Appointment</title>
-</head>
-<body>
-    <header>
-        <x-nav/>
-    </header>
+<x-base>
+    <x-slot:vite>
+        @vite(['resources/sass/body.scss', 'resources/sass/nav.scss', 'resources/sass/form.scss', 'resources/sass/edit.scss'])
+    </x-slot>
+    <x-slot:title>
+        Edit Appointment
+    </x-slot>
+
     <form action="appointments" method="POST">
         @csrf
         @method('PATCH')
@@ -21,9 +16,9 @@
                 <th class="original">Doctor (original)</th>
             </tr>
             <tr>
-                <td class="original">{{ $app->appointmentDate }}</td>
-                <td class="original">{{ $app->patient->lastname }} {{ $app->patient->firstname }}</td>
-                <td class="original">{{ $app->doctor->lastname }} {{ $app->doctor->firstname }}</td>
+                <td class="original">{{ $appointment->appointment_date }}</td>
+                <td class="original">{{ $appointment->patient->lastname }} {{ $appointment->patient->firstname }}</td>
+                <td class="original">{{ $appointment->doctor->lastname }} {{ $appointment->doctor->firstname }}</td>
             </tr>
             <tr>
                 <th>Date</th>
@@ -32,11 +27,11 @@
             </tr>
             <tr>
                 <td>
-                    <input type="date" name="appointmentDate" id="appointmentDate">
+                    <input type="date" name="appointment_date" id="appointment_date">
                 </td>
                 <td>
                     <select name="patient_id" id="patient_id">
-                        <option value="{{ $app->patient->id }}" selected>{{ $app->patient->lastname }} {{ $app->patient->firstname }}</option>
+                        <option value="{{ $appointment->patient->id }}" selected>{{ $appointment->patient->lastname }} {{ $appointment->patient->firstname }}</option>
                         @foreach ($patients as $patient)
                             <option value="{{ $patient->id }}">{{ $patient->lastname }} {{ $patient->firstname }}</option>
                         @endforeach
@@ -44,7 +39,7 @@
                 </td>
                 <td>
                     <select name="doctor_id" id="doctor_id">
-                        <option value="{{ $app->doctor->id }}" selected>{{ $app->doctor->lastname }} {{ $app->doctor->firstname }}</option>
+                        <option value="{{ $appointment->doctor->id }}" selected>{{ $appointment->doctor->lastname }} {{ $appointment->doctor->firstname }}</option>
                         @foreach ($doctors as $doctor)
                             <option value="{{ $doctor->id }}">{{ $doctor->lastname }} {{ $doctor->firstname }}</option>
                         @endforeach
@@ -52,7 +47,16 @@
                 </td>
             </tr>
         </table>
-        <button name="id" id="id" value="{{ $app->id }}" type="submit">Submit</button>
+        <button name="id" id="id" value="{{ $appointment->id }}" type="submit">Submit</button>
     </form>
-</body>
-</html>
+     
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+</x-base>

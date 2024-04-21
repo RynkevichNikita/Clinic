@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\CorrectDate;
 
 class UpdateAppointmentRequest extends FormRequest
 {
@@ -23,7 +22,7 @@ class UpdateAppointmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'appointmentDate' => ['nullable', 'date', new CorrectDate],
+            'appointment_date' => ['nullable', 'after_or_equal:today'],
             'patient_id' => ['nullable', 'exists:patients,id'],
             'doctor_id' => ['nullable', 'exists:doctors,id'],
         ];

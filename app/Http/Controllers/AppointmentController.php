@@ -13,7 +13,7 @@ class AppointmentController extends Controller
 {
     public function show()
     {
-        $appointments = Appointment::orderBy('appointmentDate')->with(['patient', 'doctor'])->paginate(30);
+        $appointments = Appointment::orderBy('appointment_date')->with(['patient', 'doctor'])->paginate(30);
         return view('appointments', [
             'appointments' => $appointments,
         ]);
@@ -32,7 +32,7 @@ class AppointmentController extends Controller
     public function store(StoreAppointmentRequest $request)
     {
         Appointment::create([
-            'appointmentDate' => $request->appointmentDate,
+            'appointment_date' => $request->appointment_date,
             'patient_id' => $request->patient_id,
             'doctor_id' => $request->doctor_id
         ]);
@@ -49,12 +49,12 @@ class AppointmentController extends Controller
 
     public function edit(Request $request)
     {
-        $app = Appointment::find($request->id);
+        $appointment = Appointment::find($request->id);
         $patients = Patient::orderBy('lastname')->get();
         $doctors = Doctor::orderBy('lastname')->get();
 
         return view('editAppointment', [
-            'app' => $app,
+            'appointment' => $appointment,
             'patients' => $patients,
             'doctors' => $doctors,
         ]);
@@ -62,21 +62,21 @@ class AppointmentController extends Controller
 
     public function update(UpdateAppointmentRequest $request)
     {
-        $app = Appointment::find($request->id);
+        $appointment = Appointment::find($request->id);
 
-        if(isset($request->appointmentDate)) {
-            $app->appointmentDate = $request->appointmentDate;
+        if(isset($request->appointment_date)) {
+            $appointment->appointment_date = $request->appointment_date;
         }
 
         if(isset($request->patient_id)) {
-            $app->patient_id = $request->patient_id;
+            $appointment->patient_id = $request->patient_id;
         }
 
         if(isset($request->doctor_id)) {
-            $app->doctor_id = $request->doctor_id;
+            $appointment->doctor_id = $request->doctor_id;
         }
 
-        $app->save();
+        $appointment->save();
 
         return redirect()->route('appointments');
     }

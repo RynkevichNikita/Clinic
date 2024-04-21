@@ -21,3 +21,6 @@ Route::get('addAppointment', [AppointmentController::class, 'create']);
 Route::post('addAppointment', [AppointmentController::class, 'store']);
 
 Route::get('editAppointment', [AppointmentController::class, 'edit']);
+Route::get('asd', function () {
+    return view('asd');
+});

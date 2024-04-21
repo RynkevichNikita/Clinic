@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=s, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite(['resources/sass/table.scss', 'resources/sass/body.scss', 'resources/sass/nav.scss', 'resources/sass/pagination.scss'])
-    <title>Patients</title>
-</head>
-<body>
-    <header>
-        <x-nav/>
-    </header>
+<x-base>
+    <x-slot:vite>
+        @vite(['resources/sass/table.scss', 'resources/sass/body.scss', 'resources/sass/nav.scss', 'resources/sass/pagination.scss'])
+    </x-slot>
+    <x-slot:title>
+        Patients
+    </x-slot>
+
     <table>
         <tr>
             <th>Last Name</th>
@@ -30,5 +25,4 @@
     <div class="pagi">
         {{ $patients->links() }}
     </div>
-</body>
-</html>
+</x-base>

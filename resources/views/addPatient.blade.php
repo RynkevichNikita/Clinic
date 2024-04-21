@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite(['resources/sass/body.scss', 'resources/sass/nav.scss', 'resources/sass/form.scss'])
-    <title>New patient</title>
-</head>
-<body>
-    <header>
-        <x-nav/>
-    </header>
+<x-base>
+    <x-slot:vite>
+        @vite(['resources/sass/body.scss', 'resources/sass/nav.scss', 'resources/sass/form.scss'])
+    </x-slot>
+    <x-slot:title>
+        New patient
+    </x-slot>
+
     <form action="addPatient" method="POST">
         @csrf
         <div>
@@ -41,5 +36,4 @@
             </ul>
         </div>
     @endif
-</body>
-</html>
+</x-base>

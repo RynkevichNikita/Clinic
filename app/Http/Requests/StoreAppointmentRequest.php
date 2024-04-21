@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\CorrectDate;
 
 class StoreAppointmentRequest extends FormRequest
 {
@@ -23,7 +22,7 @@ class StoreAppointmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'appointmentDate' => ['required', new CorrectDate],
+            'appointment_date' => ['required', 'after_or_equal:today'],
             'patient_id' => ['required', 'exists:patients,id'],
             'doctor_id' => ['required', 'exists:doctors,id'],
         ];

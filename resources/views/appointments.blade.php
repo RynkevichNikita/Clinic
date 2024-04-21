@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite(['resources/sass/table.scss', 'resources/sass/body.scss', 'resources/sass/nav.scss', 'resources/sass/pagination.scss', 'resources/sass/appointment.scss'])
-    <title>Appointments</title>
-</head>
-<body>
-    <header>
-        <x-nav/>
-    </header>
+<x-base>
+    <x-slot:vite>
+        @vite(['resources/sass/table.scss', 'resources/sass/body.scss', 'resources/sass/nav.scss', 'resources/sass/pagination.scss', 'resources/sass/appointment.scss'])
+    </x-slot>
+    <x-slot:title>
+        Appointments
+    </x-slot>
+
     <table>
         <tr>
             <th>Appointment Date</th>
@@ -19,7 +14,7 @@
         </tr>
         @foreach ($appointments as $appointment)
             <tr>
-                <td>{{ $appointment->appointmentDate }}</td>
+                <td>{{ $appointment->appointment_date }}</td>
                 <td>{{ $appointment->patient->lastname }} {{ $appointment->patient->firstname }}</td>
                 <td>{{ $appointment->doctor->lastname }} {{ $appointment->doctor->firstname }}</td>
                 <td class="edit"><a href="editAppointment?id={{ $appointment->id }}">Edit</a></td>
@@ -34,5 +29,4 @@
         @endforeach
     </table>
         {{ $appointments->links() }}
-</body>
-</html>
+</x-base>
